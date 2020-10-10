@@ -1,12 +1,14 @@
 package main
 
 import (
+	"fmt"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"os"
 )
 
 var lastServedIndex int
@@ -46,7 +48,10 @@ func main() {
 			counter(&lastServedIndex, len(availableServers))
 		}
 	})
-	log.Fatalln(http.ListenAndServe(":8000", nil))
+
+	fmt.Printf("load balancer server started at port %s", os.Args[1])
+	log.Fatalln(http.ListenAndServe(os.Args[1], nil))
+
 }
 
 func yamlReader() []*Server {

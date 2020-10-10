@@ -11,7 +11,7 @@ func main() {
 	http.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
 		_, _ = fmt.Fprintf(w, "test route called form  %s", os.Args[2])
 	})
-	fmt.Printf("server started at port %s", os.Args[1])
+	fmt.Printf("backend server started at port %s", os.Args[1])
 	_ = http.ListenAndServe(os.Args[1], nil)
 }
 
