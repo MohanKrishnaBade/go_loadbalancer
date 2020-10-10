@@ -15,6 +15,11 @@ GoLang gateway that distributes the incoming traffic to the BE servers.
 3. add BE server url's in the server.yaml file
 4. you can test it by hitting the loader blancer URL mutiple times.
 
+# make commands to simpliy the process even further
+1. `make load_server` -> to start the load balancer
+2. `make server1 && make server2 && ...` -> to spin up the BE servers on different ports
+3. `make load_test` to perform a load test against the load balancer.
+
 # sample output
 ![Alt text](asserts/img1.png?raw=true "Title")
 
