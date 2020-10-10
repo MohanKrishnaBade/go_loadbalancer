@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
@@ -38,18 +37,21 @@ func main() {
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		availableServers := yamlReader()
-		for lastServedIndex < len(availableServers) {
+		noOfServers := len(availableServers)
+		for lastServedIndex < noOfServers {
 			server := availableServers[lastServedIndex]
 			if server.IsHealthy() {
 				server.ReverseProxy().ServeHTTP(w, r)
-				counter(&lastServedIndex, len(availableServers))
+				log.Printf("-- server %s served\n ", availableServers[lastServedIndex].Url)
+				counter(&lastServedIndex, noOfServers)
 				return
+			} else {
+				counter(&lastServedIndex, noOfServers)
 			}
-			counter(&lastServedIndex, len(availableServers))
 		}
 	})
 
-	fmt.Printf("load balancer server started at port %s", os.Args[1])
+	log.Printf("<--> load balancer server started at port %s\n", os.Args[1])
 	log.Fatalln(http.ListenAndServe(os.Args[1], nil))
 
 }
