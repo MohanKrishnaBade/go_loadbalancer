@@ -15,6 +15,9 @@ GoLang gateway that distributes the incoming traffic to the BE servers.
 3. add BE server url's in the server.yaml file
 4. you can test it by hitting the loader blancer URL mutiple times.
 
+# sample output
+![Alt text](asserts/img1.png?raw=true "Title")
+
    
 
 
